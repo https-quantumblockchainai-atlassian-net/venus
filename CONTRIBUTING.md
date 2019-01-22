@@ -48,6 +48,7 @@ Start by forking venus on Github. Then pull the repository and enter the directo
 
     $ git pull <your fork>
     $ cd venus
+    $ git submodule update --init --recursive
 
 Install node packages and `grunt`. You might need to install Node.js and npm.
 
