@@ -2,20 +2,18 @@
   "name": "venus",
   "version": "0.1.0",
   "description": "RISC-V assembler and emulator",
-  "main": "Gruntfile.js",
   "scripts": {
-    "test": "test"
+    "test": "grunt test"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ThaumicMekanism/venus.git"
+    "url": "git+https://github.com/61c-teach/venus.git"
   },
-  "author": "Keyhan Vakil and Stephan Kaminsky",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ThaumicMekanism/venus/issues"
+    "url": "https://github.com/61c-teach/venus/issues"
   },
-  "homepage": "https://github.com/ThaumicMekanism/venus#readme",
+  "homepage": "https://github.com/61c-teach/venus#readme",
   "devDependencies": {
     "grunt": "^1.5.3",
     "grunt-cli": "^1.4.3",

@@ -1,32 +1,27 @@
-# [Venus](https://ThaumicMekanism.github.io/venus/)
-[![Build Status](https://travis-ci.org/ThaumicMekanism/venus.svg?branch=master)](https://travis-ci.org/ThaumicMekanism/venus)
+# Venus
 
-__Venus__ is a RISC-V instruction set simulator built for education.
+**Venus** is a RISC-V instruction set simulator built for education. This fork is primarily maintained by CS 61C Staff for (CS 61C)[https://cs61c.org/].
 
-## Using Venus
-
-Venus is [available online](https://ThaumicMekanism.github.io/venus/).
+Venus is available online at [https://venus.cs61c.org/](https://venus.cs61c.org/).
 
 ## Features
+
 * RV32IM
 * Single-step debugging with undo feature
 * Breakpoint debugging
 * View machine code and original instructions side-by-side
 * Several `ecall`s: including `print` and `sbrk`
 * Memory visualization
-* Basic External Package Management System
+* Basic external package management system
 
 ## Resources
 
-#### [User Guide](https://github.com/ThaumicMekanism/venus/wiki)
-
-#### [Roadmap](https://github.com/ThaumicMekanism/venus/projects/1)
-
-#### [Contributing](https://github.com/ThaumicMekanism/venus/blob/master/CONTRIBUTING.md)
-
-#### [MIT License](https://github.com/ThaumicMekanism/venus/blob/master/LICENSE)
+* [Wiki](https://github.com/61c-teach/venus/wiki)
+* [Web App](https://venus.cs61c.org/)
+* [JAR Releases](https://github.com/61c-teach/venus/releases)
 
 ## Credit
 
-* Currently Maintained by [ThaumicMekanism](https://github.com/ThaumicMekanism/venus)
-* Originally made by [kvakil](https://github.com/kvakil/venus)
+See the [AUTHORS](https://github.com/61c-teach/venus/blob/js/AUTHORS) file.
+
+This repo was forked from [ThaumicMekanism's fork](https://github.com/ThaumicMekanism/venus), which was forked from [kvakil's fork](https://github.com/kvakil/venus).
