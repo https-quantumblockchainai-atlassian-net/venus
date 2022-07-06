@@ -1,0 +1,38 @@
+name: Build - Web
+on:
+  push:
+    branches:
+      - js
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
+      - uses: actions/setup-java@v3
+        with:
+          distribution: temurin
+          java-version: 11
+          cache: gradle
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: npm
+      - run: npm ci
+      - run: ./gradlew build --no-daemon -x ktlint
+      - run: ./gradlew ktlint --no-daemon
+      - run: grunt test
+      - run: grunt dist
+      - run: |
+          ./gradlew dokka
+          mv doc out
+      - uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: out
+          git-config-name: GitHub Actions
+          git-config-email: cs61c@berkeley.edu
+          clean-exclude: |
+            /jvm
