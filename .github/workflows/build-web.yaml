@@ -22,10 +22,10 @@ jobs:
           node-version: 16
           cache: npm
       - run: npm ci
-      - run: ./gradlew build --no-daemon -x ktlint
-      - run: ./gradlew ktlint --no-daemon
-      - run: grunt test
+      - run: ./gradlew build -x ktlint
+      - run: ./gradlew ktlint
       - run: grunt dist
+      - run: grunt test
       - run: |
           ./gradlew dokka
           mv doc out
