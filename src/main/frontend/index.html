@@ -228,7 +228,7 @@
                     <div id="sv-div" class="panel-block">
                       <div class="field is-horizontal">
                         <div class="field-label">
-                          <button id="sv" class="button" onclick="if(window.svclr&&this.value==='false'){window.svclr = false;return;}window.svclr = false;toggleThis(this);driver.persistentStorage(this.value === 'true');" value="false" style="text-align: center;">Save on Close</button>
+                          <button id="sv" class="button" onclick="if(window.svclr&&this.value==='false'){window.svclr = false;return;}window.svclr = false;toggleThis(this);driver.persistentStorage(this.value === 'true');" value="true" style="text-align: center;">Save on Close</button>
                         </div>
                         <div class="field-body is-expanded">
                           <label class="label" id="forsv" for="sv">Save on Close</label>
@@ -248,7 +248,7 @@
                     <div id="mutableText-div" class="panel-block">
                       <div class="field is-horizontal">
                         <div class="field-label">
-                          <button id="mutableText" class="button is-primary" onclick="toggleThis(this);driver.setMutableText(this.value === 'true');" value="true" style="text-align: center;height: 45px;">Mutable Text</button>
+                          <button id="mutableText" class="button is-primary" onclick="toggleThis(this);driver.setMutableText(this.value === 'true');" value="false" style="text-align: center;height: 45px;">Mutable Text</button>
                         </div>
                         <div class="field-body is-expanded">
                           <label class="label" for="mutableText">Mutable Text?</label>
@@ -287,7 +287,7 @@
                     </div>
                     <div class="panel-block">
                       <label class="label is-small" for="tmaxsteps-val">Max number of steps: <br>(Negative means ignored) </label><br>
-                      <input id="tmaxsteps-val" type="number" class="input is-small" style="width:180px;" onblur="" value=-1 spellcheck="false" onkeyup="driver.updateMaxSteps()">
+                      <input id="tmaxsteps-val" type="number" class="input is-small" style="width:180px;" onblur="" value=500000 spellcheck="false" onkeyup="driver.updateMaxSteps()">
                     </div>
                     <div class="panel-block">
                       <label class="switch">

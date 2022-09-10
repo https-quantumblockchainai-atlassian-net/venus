@@ -49,7 +49,8 @@ import kotlin.dom.removeClass
     val mainCache: CacheHandler = CacheHandler(1)
     var cache: CacheHandler = mainCache
     var cacheLevels: ArrayList<CacheHandler> = arrayListOf(mainCache)
-    val simSettings = SimulatorSettings()
+    val simSettings = SimulatorSettings(mutableText = false, maxSteps = 500000)
+
     var sim: Simulator = Simulator(LinkedProgram(), VFS, settings = simSettings)
 
     val watchpoints = HashSet<WatchPoint>()
@@ -81,7 +82,8 @@ import kotlin.dom.removeClass
         console.log("Loading driver...")
         mainCache.attach(false)
 
-        useLS = LS.get("venus") == "true"
+        useLS = LS.safeget("useLS", "true") == "true"
+        LS.set("useLS", useLS.toString())
         Renderer.renderButton(document.getElementById("sv") as HTMLButtonElement, useLS)
 
         window.setTimeout(Driver::initTimeout, 5)
@@ -1259,11 +1261,11 @@ import kotlin.dom.removeClass
         useLS = b
         if (useLS) {
             console.log("Persistent storage has been enabled!")
-            LS.set("venus", "true")
+            LS.set("useLS", "true")
             saveAll()
         } else {
             console.log("Persistent storage has been disabled!")
-            LS.set("venus", "false")
+            LS.set("useLS", "false")
             // this.LS.reset()
         }
     }
