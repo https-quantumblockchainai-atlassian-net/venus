@@ -36,6 +36,13 @@
     background-color: black;
 }
 
+.theme-dark #memory-table th {
+    text-align: center;
+    vertical-align: middle;
+    background-color: #111111;
+    color: #CCCCCC;
+}
+
 .theme-dark #memory-table td {
     text-align: center;
     vertical-align: middle;

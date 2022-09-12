@@ -712,7 +712,7 @@ internal object Renderer {
             for (i in 1..4) {
                 val tdByte = row.childNodes[i] as HTMLTableCellElement
                 val input = tdByte.childNodes[0] as HTMLInputElement
-                val byte = sim.loadByte(rowAddr + i - 1)
+                val byte = sim.loadByte(rowAddr + 4 - i)
                 input.value = displayByteAsString(byte)
                 input.disabled = false
                 js("input.onkeydown();")
