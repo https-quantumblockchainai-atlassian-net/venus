@@ -13,45 +13,62 @@ var xxd = Command(
             if (args.size < 1) {
                 return Command["xxd"].help
             }
+            var littleEndian = false
+            var fileName = args[0]
             var result = ""
-            val charchunk = 2
+            var charchunk = 2
             val charsperline = 16
-            var f = t.vfs.getObjectFromPath(args[0]) ?: return "xxd: could not find the file!"
+
+            if (args[0] == "-e") {
+                littleEndian = true
+                fileName = args[1]
+                charchunk = 4
+            }
+
+            var f = t.vfs.getObjectFromPath(fileName) ?: return "xxd: could not find the file!"
             if (f is VFSFile) {
                 val text = f.readText()
                 var i = 0
                 var curline = ""
+                var curchunk = ""
                 if (text.length > 0) {
                     result += Renderer.toHex(0, add_prefix = false) + ":"
                 }
                 for (chr: Char in text.toCharArray()) {
+                    if (curline.length % charchunk == 0) {
+                        if (littleEndian && curchunk.isNotEmpty()) curchunk = curchunk.padStart(charchunk * 2, ' ')
+                        result += "$curchunk "
+                        curchunk = ""
+                    }
                     if (curline.length == charsperline) {
-                        result += "  $curline\n"
-                        result += Renderer.toHex(i, add_prefix = false) + ":"
+                        result += " $curline\n"
+                        result += Renderer.toHex(i, add_prefix = false) + ": "
                         curline = ""
                     }
-                    if (curline.length % charchunk == 0) {
-                        result += " "
-                    }
                     val cv = chr.toInt()
-                    result += Renderer.toHex(cv, 2, false)
+                    if (littleEndian) {
+                        curchunk = Renderer.toHex(cv, 2, false, true) + curchunk
+                    } else {
+                        curchunk += Renderer.toHex(cv, 2, false, true)
+                    }
                     curline += when (cv) {
                         !in 32..126 -> "."
                         else -> chr.toString()
                     }
                     i++
                 }
-                if (curline.length > 0) {
+                if (curchunk.isNotEmpty()) {
+                    curchunk = if (littleEndian) curchunk.padStart(charchunk * 2, ' ')
+                    else curchunk.padEnd(charchunk * 2, ' ')
+                    result += "$curchunk "
+                }
+                if (curline.isNotEmpty()) {
                     var charsLeft = charsperline - curline.length
-                    if (charsLeft % 2 == 1) {
-                        charsLeft--
-                        result += "  "
-                    }
-                    charsLeft /= 2
+                    charsLeft /= charchunk
                     for (j in 0 until charsLeft) {
-                        result += "     "
+                        result += " " + "  ".repeat(charchunk)
                     }
-                    result += "  $curline"
+                    result += " $curline"
                 }
             } else {
                 result = "xxd: only works on files!"

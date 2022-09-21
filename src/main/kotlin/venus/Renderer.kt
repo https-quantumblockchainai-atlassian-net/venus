@@ -769,7 +769,7 @@ internal object Renderer {
      * @return the hexadecimal string corresponding to that value
      * @todo move this?
      */
-    fun toHex(value: Int, num_nibbles: Int = 8, add_prefix: Boolean = true): String {
+    fun toHex(value: Int, num_nibbles: Int = 8, add_prefix: Boolean = true, lowercase: Boolean = false): String {
         var remainder = value.toLong()
         var suffix = ""
 
@@ -781,6 +781,9 @@ internal object Renderer {
 
         if (add_prefix) {
             suffix = "0x" + suffix
+        }
+        if (lowercase) {
+            suffix = suffix.toLowerCase()
         }
 
         return suffix
