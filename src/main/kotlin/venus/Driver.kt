@@ -680,6 +680,7 @@ import kotlin.dom.removeClass
     @JsName("runEnd") fun runEnd() {
         handleNotExitOver()
         sim.finishPlugins()
+        sim.checkNumFreeBlocks()
         Renderer.updatePC(sim.getPC())
         Renderer.updateAll()
         Renderer.setRunButtonSpinning(false)
