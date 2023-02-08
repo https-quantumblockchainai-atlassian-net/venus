@@ -291,6 +291,26 @@
                         </div>
                       </div>
                     </div>
+                    <div id="memcheck-div" class="panel-block">
+                      <div class="field is-horizontal">
+                        <div class="field-label">
+                          <button id="setMemcheck" class="button" onclick="toggleThis(this);driver.setMemcheck(this.value === 'true');" style="text-align: center;">Memcheck</button>
+                        </div>
+                        <div class="field-body is-expanded">
+                          <label class="label" for="setMemcheck">Enable Memcheck?</label>
+                        </div>
+                      </div>
+                    </div>
+                    <div id="memcheckVerbose-div" class="panel-block">
+                      <div class="field is-horizontal">
+                        <div class="field-label">
+                          <button id="setMemcheckVerbose" class="button" onclick="toggleThis(this);driver.setMemcheckVerbose(this.value === 'true');" style="text-align: center;">Verbose Memcheck</button>
+                        </div>
+                        <div class="field-body is-expanded">
+                          <label class="label" for="setMemcheckVerbose">Enable Verbose Memcheck?</label>
+                        </div>
+                      </div>
+                    </div>
                     <div class="panel-block">
                       <label class="label is-small" for="tmaxsteps-val">Max number of steps: <br>(Negative means ignored) </label><br>
                       <input id="tmaxsteps-val" type="number" class="input is-small" style="width:180px;" onblur="" value=500000 spellcheck="false" onkeyup="driver.updateMaxSteps()">

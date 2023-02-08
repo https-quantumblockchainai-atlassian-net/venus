@@ -302,9 +302,9 @@ import kotlin.dom.removeClass
      */
     internal fun assemble(text: String, name: String = "", absPath: String): Program? {
         val (prog, errors, warnings) = if (name != "") {
-            Assembler.assemble(text, name, abspath = absPath)
+            Assembler.assemble(text, name, abspath = absPath, expandDataSegment = simSettings.memcheck)
         } else {
-            Assembler.assemble(text, abspath = absPath)
+            Assembler.assemble(text, abspath = absPath, expandDataSegment = simSettings.memcheck)
         }
         if (errors.isNotEmpty()) {
             Renderer.displayAssemblerError(errors.first())
@@ -315,7 +315,7 @@ import kotlin.dom.removeClass
 
     internal fun link(progs: List<Program>): Boolean {
         try {
-            val PandL = ProgramAndLibraries(progs, VFS)
+            val PandL = ProgramAndLibraries(progs, VFS, expandDataSegment = simSettings.memcheck)
             val linked = Linker.link(PandL)
             loadSim(linked)
             return true
@@ -886,6 +886,15 @@ import kotlin.dom.removeClass
 
     @JsName("setSetRegsOnInit") fun setSetRegsOnInit(b: Boolean) {
         simSettings.setRegesOnInit = b
+    }
+
+    @JsName("setMemcheck") fun setMemcheck(b: Boolean) {
+        simSettings.memcheck = simSettings.memcheckVerbose || b
+    }
+
+    @JsName("setMemcheckVerbose") fun setMemcheckVerbose(b: Boolean) {
+        simSettings.memcheck = simSettings.memcheck || b
+        simSettings.memcheckVerbose = b
     }
 
     @JsName("verifyText") fun verifyText(input: HTMLInputElement) {
