@@ -58,7 +58,7 @@ var run = Command(
             // Assembly stage for any files
             var msg = ""
             for (file in files) {
-                val (prog, errors, warnings) = Assembler.assemble(file.readText(), file.label, file.getPath())
+                val (prog, errors, warnings) = Assembler.assemble(file.readText(), file.label, file.getPath(), Driver.simSettings.memcheck)
                 if (errors.isNotEmpty()) {
                     msg += "assemble: Could not assemble file! Here are the errors:"
                     for (error in errors) {

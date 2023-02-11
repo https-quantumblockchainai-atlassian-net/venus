@@ -1,5 +1,6 @@
 package venus.terminal.cmds
 
+import venus.Driver
 import venusbackend.assembler.Assembler
 import venus.terminal.Command
 import venus.terminal.Command.Companion.fileTabComplete
@@ -31,7 +32,7 @@ var assemble = Command(
                 return "assemble: $programout: Invalid name"
             }
             var msg = ""
-            val (prog, errors, warnings) = Assembler.assemble((file as VFSFile).readText(), programout, file.getPath())
+            val (prog, errors, warnings) = Assembler.assemble((file as VFSFile).readText(), programout, file.getPath(), Driver.simSettings.memcheck)
             if (errors.isNotEmpty()) {
                 msg += "assemble: Could not assemble file! Here are the errors:"
                 for (error in errors) {

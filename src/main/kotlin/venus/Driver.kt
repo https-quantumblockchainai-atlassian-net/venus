@@ -303,10 +303,8 @@ import kotlin.dom.removeClass
     internal fun assemble(text: String, name: String = "", absPath: String): Program? {
         val (prog, errors, warnings) = if (name != "") {
             Assembler.assemble(text, name, abspath = absPath, expandDataSegment = simSettings.memcheck)
-        } else if (activeFileinEditor != "") {
-            Assembler.assemble(text, activeFileinEditor, abspath = absPath, expandDataSegment = simSettings.memcheck)
         } else {
-            Assembler.assemble(text, "untitled.s", abspath = absPath, expandDataSegment = simSettings.memcheck)
+            Assembler.assemble(text, abspath = absPath, expandDataSegment = simSettings.memcheck)
         }
         if (errors.isNotEmpty()) {
             Renderer.displayAssemblerError(errors.first())
@@ -364,7 +362,7 @@ import kotlin.dom.removeClass
         var success = true
         var errs = ""
         var sim = js("undefined;")
-        val (prog, errors, warnings) = Assembler.assemble(text, abspath = absPath)
+        val (prog, errors, warnings) = Assembler.assemble(text, abspath = absPath, expandDataSegment = Driver.simSettings.memcheck)
         if (errors.isNotEmpty()) {
             errs = errors.first().toString()
             success = false
